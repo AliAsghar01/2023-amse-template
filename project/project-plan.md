@@ -28,6 +28,7 @@ The street directory dataset contains information about the streets, roads, and 
 * Set up a mechanism to fetch the parking violation data from the provided data source.
 * Set up a mechanism to fetch the street directory data from the provided data source.
 
+
 2. Data Preprocessing:
 * Clean and preprocess the parking violation data, removing any irrelevant or inconsistent entries.
 * Clean and preprocess the street directory data, ensuring data quality and consistency.
@@ -54,4 +55,3 @@ The street directory dataset contains information about the streets, roads, and 
 * Document the project process, including data acquisition, preprocessing, analysis, and visualization.
 * Prepare a comprehensive report summarizing the findings, insights, and recommendations.
 * Present the results to stakeholders, highlighting the significance and potential impact of the analysis.
-
