@@ -62,15 +62,15 @@ def data_into_database(transformed_df, table_name):
 
     
 
-# Replace "https://example.com/path/to/file.csv" with the actual URL of your CSV file
+# URL of your CSV file
 csv_url = "https://download-data.deutschebahn.com/static/datasets/haltestellen/D_Bahnhof_2020_alle.CSV"
 
 df = data_extraction_csv(csv_url)
 
 if df is not None:
-    # Perform data transformation by dropping the "Status" column
+    # Perform data transformation 
     transformed_df = data_transformation(df)
 
     if transformed_df is not None:
-        # Call data_loader function to load transformed data into the database
+        # Call data_into_database function to load transformed data into the database
         data_into_database(transformed_df, "trainstops")
