@@ -33,7 +33,7 @@ def data_transformation(df):
 
 def data_loader(data_frame, table_name):
     print("SQLite DB Operations....")
-    engine = create_engine("sqlite:///../trainstops.db")
+    engine = create_engine("sqlite:///../trainstops.sqlite")
     with engine.begin() as connection:
         data_frame.to_sql(table_name, connection, if_exists="replace", index=False)
     print("Finish: Data Loading")
@@ -49,4 +49,4 @@ if df is not None:
 
     if transformed_df is not None:
         # Call data_loader function to load transformed data into the database
-        data_loader(transformed_df, "table_name")
+        data_loader(transformed_df, "trainstops")
