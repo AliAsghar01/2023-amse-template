@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 def data_extraction_csv(url):
     print("Data Extraction in progress...")
     try:
-        df = pd.read_csv(url, delimiter=';', error_bad_lines=False)
+        df = pd.read_csv(url, delimiter=';', on_bad_lines='skip')
         print("Finish: Data Extraction")
         return df
     except Exception as e:
@@ -33,7 +33,7 @@ def data_transformation(df):
 
 def data_loader(data_frame, table_name):
     print("SQLite DB Operations....")
-    engine = create_engine("sqlite:///trainstops.db")
+    engine = create_engine("sqlite:///../trainstops.db")
     with engine.begin() as connection:
         data_frame.to_sql(table_name, connection, if_exists="replace", index=False)
     print("Finish: Data Loading")
