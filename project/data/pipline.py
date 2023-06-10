@@ -1,44 +1,92 @@
 import pandas as pd
 import sqlite3
 
-# Read the first XLS file with 6 columns using pandas
-data1 = pd.read_excel('/Users/aliasghar/Documents/ASME/2023-amse-template/project/datasets/parking_violations_Bonn.xls')
-
-# Read the second XLS file with 5 columns using pandas
-data2 = pd.read_excel('/Users/aliasghar/Documents/ASME/2023-amse-template/project/datasets/Street_directory.xls')
-
-# Read only the desired two columns from the first XLS file
-data2_selected = data2[['strasse', 'strassen_bez']] # Replace 'Column1' and 'Column2' with the actual column names
+def Extract_Data(file_path):
+    # Read the XLS file using pandas
+    data = pd.read_excel(file_path)
+    return data
 
 
-# Connect to the SQLite database
-conn = sqlite3.connect('database.db')
 
-# Store the data from the first XLS file in a table called 'table1'
-data1.to_sql('table1', conn, if_exists='replace', index=False)
+def Transform_Data1(data, selected_columns=None):
+    if selected_columns:
+        # Select the desired columns
+        data_selected = data[selected_columns]
+        # Rename the columns
+        data_selected.rename(columns={
+            'TATZEIT': 'Crime_Str_No',
+            'TATORT': 'Crime_location',
+            'TATBESTANDBE_TBNR': 'Crime_Violation_No',
+            'GELDBUSSE': 'Total_Fine',
+            'BEZEICHNUNG': 'Vehicle_Description'
+        }, inplace=True)
+        return data_selected
+    else:
+        return data
 
-# Store the data from the second XLS file in a table called 'table2'
-data2_selected.to_sql('table2', conn, if_exists='replace', index=False)
 
-# Close the database connections
-conn.close()
+def Transform_Data2(data, selected_columns=None):
+    if selected_columns:
+        # Select the desired columns
+        data_selected = data[selected_columns]
+        # Rename the columns
+        data_selected.rename(columns={'strassen_bez': 'Street Name', 'strasse': 'Street Number'}, inplace=True)
+        return data_selected
+    else:
+        return data
 
-# Display the contents of the tables
-conn = sqlite3.connect('database.db')
 
-# Fetch and print the data from 'table1'
-cursor = conn.execute('SELECT * FROM table1')
-table1_data = cursor.fetchall()
-print("Table 1:")
-for row in table1_data:
-    print(row)
+def load_data(data, table_name, db_file):
+    # Connect to the SQLite database
+    conn = sqlite3.connect(db_file)
 
-# Fetch and print the data from 'table2'
-cursor = conn.execute('SELECT * FROM table2')
-table2_data = cursor.fetchall()
-print("\nTable 2:")
-for row in table2_data:
-    print(row)
+    # Store the data in the specified table
+    data.to_sql(table_name, conn, if_exists='replace', index=False)
 
-# Close the database connection
-conn.close()
+    # Close the database connection
+    conn.close()
+
+def driver():
+    # Extract data from the first XLS file
+    parking_violation_file = '/Users/aliasghar/Documents/ASME/2023-amse-template/project/datasets/parking_violations_Bonn.xls'
+    data1 = Extract_Data(parking_violation_file)
+
+    #Transform data from the first XLS file by selecting desired columns
+    selected_columns = ['TATZEIT', 'TATORT', 'TATBESTANDBE_TBNR', 'GELDBUSSE', 'BEZEICHNUNG']
+    data1_selected = Transform_Data1(data1, selected_columns)
+
+    # Extract data from the second XLS file
+    street_directory_file = '/Users/aliasghar/Documents/ASME/2023-amse-template/project/datasets/Street_directory.xls'
+    data2 = Extract_Data(street_directory_file)
+
+    # Transform data from the second XLS file by selecting desired columns
+    selected_columns = ['strasse', 'strassen_bez']
+    data2_selected = Transform_Data2(data2, selected_columns)
+
+    # Load data into the SQLite database
+    db_file = 'database.db'
+    load_data(data1_selected, 'parking_violations', db_file)
+    load_data(data2_selected, 'Street_directory', db_file)
+
+    # Connect to the SQLite database
+    conn = sqlite3.connect(db_file)
+
+    # Fetch and print the data from 'parking_violations'
+    cursor = conn.execute('SELECT * FROM parking_violations')
+    parking_violations_data = cursor.fetchall()
+    print("Table 1:")
+    for row in parking_violations_data:
+        print(row)
+
+    # Fetch and print the data from 'Street_directory'
+    cursor = conn.execute('SELECT * FROM Street_directory')
+    Street_directory_data = cursor.fetchall()
+    print("\nTable 2:")
+    for row in Street_directory_data:
+        print(row)
+
+    # Close the database connection
+    conn.close()
+
+# Run the driver function
+driver()
