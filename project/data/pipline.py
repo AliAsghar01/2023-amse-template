@@ -6,8 +6,6 @@ def Extract_Data(file_path):
     data = pd.read_excel(file_path)
     return data
 
-
-
 def Transform_Data1(data, selected_columns=None):
     if selected_columns:
         # Select the desired columns
@@ -24,7 +22,6 @@ def Transform_Data1(data, selected_columns=None):
     else:
         return data
 
-
 def Transform_Data2(data, selected_columns=None):
     if selected_columns:
         # Select the desired columns
@@ -34,7 +31,6 @@ def Transform_Data2(data, selected_columns=None):
         return data_selected
     else:
         return data
-
 
 def load_data(data, table_name, db_file):
     # Connect to the SQLite database
@@ -48,23 +44,23 @@ def load_data(data, table_name, db_file):
 
 def driver():
     # Extract data from the first XLS file
-    parking_violation_file = '/Users/aliasghar/Documents/ASME/2023-amse-template/project/datasets/parking_violations_Bonn.xls'
-    data1 = Extract_Data(parking_violation_file)
+    parking_violation_url = 'https://docs.google.com/spreadsheets/d/1nqo4LbJBF1dzHT5P4iel2Mr3Z7bqUcBE/export?format=xlsx'
+    data1 = Extract_Data(parking_violation_url)
 
-    #Transform data from the first XLS file by selecting desired columns
+    # Transform data from the first XLS file by selecting desired columns
     selected_columns = ['TATZEIT', 'TATORT', 'TATBESTANDBE_TBNR', 'GELDBUSSE', 'BEZEICHNUNG']
     data1_selected = Transform_Data1(data1, selected_columns)
 
     # Extract data from the second XLS file
-    street_directory_file = '/Users/aliasghar/Documents/ASME/2023-amse-template/project/datasets/Street_directory.xls'
-    data2 = Extract_Data(street_directory_file)
+    street_directory_url = 'https://docs.google.com/spreadsheets/d/1r1trwsD2uwpC5U_xxO5iNzNl_Re_vE_g/export?format=xlsx'
+    data2 = Extract_Data(street_directory_url)
 
     # Transform data from the second XLS file by selecting desired columns
     selected_columns = ['strasse', 'strassen_bez']
     data2_selected = Transform_Data2(data2, selected_columns)
 
     # Load data into the SQLite database
-    db_file = 'database.db'
+    db_file = 'traffic_violation.sqlite'
     load_data(data1_selected, 'parking_violations', db_file)
     load_data(data2_selected, 'Street_directory', db_file)
 

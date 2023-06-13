@@ -25,7 +25,7 @@ def test_pipeline():
     test_data_extract(parking_violation_file)
     street_directory_file = '/Users/aliasghar/Documents/ASME/2023-amse-template/project/datasets/Street_directory.xls'
     test_data_extract(street_directory_file)
-    db_file = 'database.db'
+    db_file = 'traffic_violation.sqlite'
     test_load_data('parking_violations', db_file)
     test_load_data('Street_directory', db_file)
 
