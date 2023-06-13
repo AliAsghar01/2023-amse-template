@@ -25,8 +25,8 @@ jobs:
 
       - name: Run tests.sh
         run: |
-          chmod +x project/tests.sh
-          ./project/tests.sh
+          chmod +x project/data/pipline.py
+          project/data/pipline.py
 
       - name: Run test.py
         run: python project/test.py
