@@ -22,11 +22,9 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r project/dependencies.txt
-      
-      - name: Run pipline.py
-        run: python project/data/pipline.py
-        
-      - name: Run test.py
-        run: python project/test.py
-        
+  
+      - name: Run the project file
+        run: |
+          chmod +x ./project/test.sh
+          ./project/test.sh
         
