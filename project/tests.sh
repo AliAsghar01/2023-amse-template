@@ -1,9 +1,10 @@
 #testing project workflows
 #!/bin/bash
-
 echo "pipeline fle executed"
 # Execute your pipeline
-python pipline.py
+
+# Install the requirements
+pip install -r project/data/pipeline.py
 
 # Validate the output file(s)
 if [ -f "traffic_violation.sqlite" ]; then
@@ -12,6 +13,10 @@ else
   echo "database file not found."
 fi
 
+# Run the pytest script
 echo " test file excuted"
-python test.py
+python -m project/test.py -v
+
+
+
 
