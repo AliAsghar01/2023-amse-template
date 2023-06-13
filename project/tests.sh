@@ -3,7 +3,6 @@
 
 echo "pipeline file executed"
 # Execute your pipeline
-python data/pipline.py
 
 python -m data.pipline -v
 # Validate the output file(s)
@@ -15,3 +14,5 @@ fi
 
 echo "test file executed"
 python -m test -v
+
+exit
