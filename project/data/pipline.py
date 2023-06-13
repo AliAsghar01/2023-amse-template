@@ -2,7 +2,7 @@ import pandas as pd
 import sqlite3
 
 def Extract_Data(file_path):
-    # Read the XLS file using pandass
+    # Read the XLS file using pandas
     data = pd.read_excel(file_path)
     return data
 
