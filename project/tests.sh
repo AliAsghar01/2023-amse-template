@@ -3,7 +3,7 @@
 
 echo "pipeline fle executed"
 # Execute your pipeline
-python -m project/data/pipline.py -v
+python -m project/data/pipline -v
 
 # Validate the output file(s)
 if [ -f "traffic_violation.sqlite" ]; then
@@ -13,5 +13,5 @@ else
 fi
 
 echo " test file excuted"
-python -m project/test.py -v
+python -m project/test -v
 
