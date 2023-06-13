@@ -1,0 +1,10 @@
+paths:
+- project/**
+
+- name: Run tests.sh
+  run: |
+    chmod +x project/tests.sh
+    ./project/tests.sh
+
+- name: Run test.py
+  run: python project/test.py
