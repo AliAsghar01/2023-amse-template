@@ -6,7 +6,7 @@ echo "pipeline fle executed"
 python pipline.py
 
 # Validate the output file(s)
-if [ -f "database.db" ]; then
+if [ -f "traffic_violation.sqlite" ]; then
   echo "database file exist."
 else
   echo "database file not found."

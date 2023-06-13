@@ -21,10 +21,10 @@ def test_load_data(table_name, db_file):
     print("test_load_data: Table exists, Test Passed")
 
 def test_pipeline():
-    parking_violation_file = '/Users/aliasghar/Documents/ASME/2023-amse-template/project/datasets/parking_violations_Bonn.xls'
-    test_data_extract(parking_violation_file)
-    street_directory_file = '/Users/aliasghar/Documents/ASME/2023-amse-template/project/datasets/Street_directory.xls'
-    test_data_extract(street_directory_file)
+    parking_violation_url = 'https://docs.google.com/spreadsheets/d/1nqo4LbJBF1dzHT5P4iel2Mr3Z7bqUcBE/export?format=xlsx'
+    test_data_extract(parking_violation_url)
+    street_directory_url = 'https://docs.google.com/spreadsheets/d/1r1trwsD2uwpC5U_xxO5iNzNl_Re_vE_g/export?format=xlsx'
+    test_data_extract(street_directory_url)
     db_file = 'traffic_violation.sqlite'
     test_load_data('parking_violations', db_file)
     test_load_data('Street_directory', db_file)
