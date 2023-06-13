@@ -1,10 +1,32 @@
-paths:
-- project/**
+name: Project Workflow
 
-- name: Run tests.sh
-  run: |
-    chmod +x project/tests.sh
-    ./project/tests.sh
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'project/**'
 
-- name: Run test.py
-  run: python project/test.py
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r dependencies.txt
+
+      - name: Run tests.sh
+        run: |
+          chmod +x project/tests.sh
+          ./project/tests.sh
+
+      - name: Run test.py
+        run: python project/test.py
