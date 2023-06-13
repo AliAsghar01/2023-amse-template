@@ -1,18 +1,16 @@
-#testing project workflows
-
 #!/bin/bash
 
-echo "pipeline fle executed"
+echo "pipeline file executed"
 # Execute your pipeline
-python pipline.py
+python data/pipline.py
 
+python -m data.pipline -v
 # Validate the output file(s)
 if [ -f "traffic_violation.sqlite" ]; then
-  echo "database file exist."
+  echo "database file exists."
 else
   echo "database file not found."
 fi
 
-echo " test file excuted"
-python test.py
-
+echo "test file executed"
+python -m test -v
