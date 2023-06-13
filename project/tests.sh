@@ -1,4 +1,4 @@
-#Run Project WorkFlow
+#Run Project Workflow 
 #!/bin/bash
 
 echo "pipeline file executed"
