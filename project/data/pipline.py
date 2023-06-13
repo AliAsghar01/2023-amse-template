@@ -33,10 +33,10 @@ def Transform_Data2(data, selected_columns=None):
         return data
 
 def load_data(data, table_name, db_file):
-    # Connect to the SQLite database
+    # Connect to the SQLite databases
     conn = sqlite3.connect(db_file)
 
-    # Store the data in the specified table
+    # Store the data in the specified tabless
     data.to_sql(table_name, conn, if_exists='replace', index=False)
 
     # Close the database connection
