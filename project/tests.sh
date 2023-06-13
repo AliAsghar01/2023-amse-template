@@ -4,7 +4,7 @@
 echo "pipeline file executed"
 # Execute your pipeline
 
-python -m ./data/pipline -v
+python ./data/pipline.py
 # Validate the output file(s)
 if [ -f "traffic_violation.sqlite" ]; then
   echo "database file exists."
@@ -13,6 +13,6 @@ else
 fi
 
 echo "test file executed"
-python -m test -v
+python test.py
 
 exit
