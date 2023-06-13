@@ -3,7 +3,7 @@
 
 echo "pipeline fle executed"
 # Execute your pipeline
-chmod +x pipline.py
+chmod +x python pipline.py
 
 # Validate the output file(s)
 if [ -f "traffic_violation.sqlite" ]; then
@@ -13,5 +13,5 @@ else
 fi
 
 echo " test file excuted"
-python test.py
+chmod +x python test.py
 
