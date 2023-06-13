@@ -1,4 +1,4 @@
-#testing project workflows
+#testing project workflow run
 #!/bin/bash
 echo "pipeline fle executed"
 # Execute your pipeline
