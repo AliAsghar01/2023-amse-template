@@ -55,16 +55,16 @@ pipeline CarPipeline
 	{
 		header: false;
 		columns: [
-			"Date" oftype text,
+			"date" oftype text,
 			"CIN" oftype CIN,
-			"Name" oftype text,
-			"Petrol" oftype PositveInteger,
-			"Diesel" oftype PositveInteger,
-			"Gas" oftype PositveInteger,
-			"Electro" oftype PositveInteger,
-			"Hybrid" oftype PositveInteger,
-			"PlugInHybrid" oftype PositveInteger,
-			"Others" oftype PositveInteger
+			"name" oftype text,
+			"petrol" oftype PositveInteger,
+			"diesel" oftype PositveInteger,
+			"gas" oftype PositveInteger,
+			"electro" oftype PositveInteger,
+			"hybrid" oftype PositveInteger,
+			"plugInHybrid" oftype PositveInteger,
+			"others" oftype PositveInteger
 		];
 	}
 
