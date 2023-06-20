@@ -6,7 +6,6 @@ pipeline AirportsPipeline
 		url: "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv";
 	}
 
-
 	block AirportsTextFileDecoder oftype TextFileInterpreter
 	{}
 
@@ -34,8 +33,6 @@ pipeline AirportsPipeline
 			"geo_punkt" oftype text
 		];
 	}
-
-	
 
 	block AirportsLoader oftype SQLiteLoader {
 		table: "airports";

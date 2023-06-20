@@ -27,7 +27,7 @@ def Transform_Data2(data, selected_columns=None):
         # Select the desired columns
         data_selected = data[selected_columns]
         # Rename the columns
-        data_selected.rename(columns={'strassen_bez': 'Street Name', 'strasse': 'Street Number'}, inplace=True)
+        data_selected.rename(columns={'strassen_bez': 'Street_Name', 'strasse': 'Street_Number'}, inplace=True)
         return data_selected
     else:
         return data
