@@ -42,10 +42,27 @@ def transform_temperatures(df):
     return df
 
 def validate_data(df):
-    # Validate Geraet IDs
-    df = df[df['Geraet'] > 0 &(df["Monat"] > 0)]
+    # Validate Geraet IDs to be greater than 0
+    df = df[df['Geraet'] > 0]
+
+    # Validate Hersteller to be non-empty strings
+    df = df[df['Hersteller'].astype(str).str.strip().ne("")]
+
+    # Validate Model to be non-empty strings
+    df = df[df['Model'].astype(str).str.strip().ne("")]
+
+    # Validate Monat to be within the range of 1 to 12
+    df = df[df['Monat'].between(1, 12)]
+
+    # Validate Temperatur and Batterietemperatur to be numeric and non-null
+    df = df[pd.to_numeric(df['Temperatur'], errors='coerce').notnull()]
+    df = df[pd.to_numeric(df['Batterietemperatur'], errors='coerce').notnull()]
+
+    # Validate Geraet aktiv to be either "Ja" or "Nein"
+    df = df[df['Geraet aktiv'].isin(['Ja', 'Nein'])]
 
     return df
+
 
 def write_to_sqlite(df, database_name, table_name):
     conn = sqlite3.connect(database_name)
