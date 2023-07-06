@@ -64,7 +64,7 @@ pipeline GTFS
 	block GTFSLoader oftype SQLiteLoader 
     {
 		table: "stops";
-		file: "GTFS.sqlite";
+		file: "gtfs.sqlite";
 	}
 
     GTFSExtractor
