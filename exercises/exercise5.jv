@@ -1,7 +1,7 @@
 pipeline GTFS 
 {
 
-    block GTFSExtractor  oftype HttpExtractor 
+    block GTFSExtractor oftype HttpExtractor 
     {
         url: "https://gtfs.rhoenenergie-bus.de/GTFS.zip";
     }
@@ -29,10 +29,11 @@ pipeline GTFS
 
 	constraint Angleconstraint oftype RangeConstraint
     { 
-        lowerBound: -90; upperBound: 90; 
+        lowerBound: -90; 
+        upperBound: 90; 
     }
 
-	valuetype Coordinates oftype decimal
+	valuetype Cordinates oftype decimal
     { 
         constraints: [Angleconstraint]; 
     }
@@ -47,13 +48,14 @@ pipeline GTFS
         constraints:[only2001];
     }
 
-	block GTFSTableInterpreter oftype TableInterpreter {
+	block GTFSTableInterpreter oftype TableInterpreter 
+    {
 		header: true;
 		columns: [
 			"stop_id" oftype integer,
 			"stop_name" oftype text,
-			"stop_lat" oftype Coordinates,
-			"stop_lon" oftype Coordinates,
+			"stop_lat" oftype Cordinates,
+			"stop_lon" oftype Cordinates,
 			"zone_id" oftype Zone,
 			
 		];
@@ -61,7 +63,7 @@ pipeline GTFS
 
 	block GTFSLoader oftype SQLiteLoader 
     {
-		table: "Stops";
+		table: "stops";
 		file: "GTFS.sqlite";
 	}
 
